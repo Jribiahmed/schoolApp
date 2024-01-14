@@ -28,4 +28,14 @@ class ModelList {
     return []; // Return empty list if no class with the given level is found
   }
 
+  static List<Etudiant> getListEtudiantByEtudiant(Etudiant etudiant) {
+    // Find the class with the matching level
+    for (classe cl in classes) {
+      if (cl.etudiants.contains(etudiant)) {
+        return cl.etudiants; // Return the list of Etudiant for the found class
+      }
+    }
+    return []; // Return empty list if no class with the given level is found
+  }
+
 }

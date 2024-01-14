@@ -63,7 +63,7 @@ class HomeView extends State<Home> {
                           ),
                         ),
                         onPressed: () {
-                          if (emailController.value.text == "admin@admin.tn" && passwordController.value.text == "admin") {
+                          if (emailController.value.text == "admin" && passwordController.value.text == "admin") {
                             showError = false;
                             Navigator.push(
                               context,

@@ -1,48 +1,40 @@
-import 'package:appschool/ModelList.dart';
-import 'package:appschool/model/etudiantModel.dart';
-import 'package:appschool/view/EtudiantList.dart';
+import 'package:appschool/model/classeModel.dart';
 import 'package:flutter/material.dart';
-class IdEtudiant extends StatefulWidget {
 
-  late Etudiant etudiant ;
-  IdEtudiant({required Key key, required this.etudiant}) : super(key: key);
+import '../model/etudiantModel.dart';
+import 'EtudiantList.dart';
+class addEtudiantView extends StatefulWidget {
+
+  List<Etudiant> etudiants ;
+  addEtudiantView({required Key key, required this.etudiants}) : super(key: key);
+
   @override
-  _IdEtudiant createState() => _IdEtudiant();
+  _addEtudiantView createState() => _addEtudiantView();
 }
-class _IdEtudiant extends  State<IdEtudiant>
+class _addEtudiantView extends  State<addEtudiantView>
 {
-  late TextEditingController nomController ;
-  late TextEditingController prenomController ;
-  late TextEditingController emailController ;
-  late TextEditingController numTelController ;
+  final TextEditingController nomController = TextEditingController();
+  final TextEditingController prenomController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController numTelController = TextEditingController();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    nomController = TextEditingController(text: widget.etudiant.nom);
-    prenomController = TextEditingController(text: widget.etudiant.prenom);
-    emailController = TextEditingController(text: widget.etudiant.email);
-    numTelController = TextEditingController(text: widget.etudiant.numTel);
-  }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: profileView(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            widget.etudiant.nom = nomController.text;
-            widget.etudiant.prenom = prenomController.text;
-            widget.etudiant.email = emailController.text;
-            widget.etudiant.numTel = numTelController.text;
-            Navigator.push(context,MaterialPageRoute(builder: (context) => EtudiantList(etudiants: ModelList.getListEtudiantByEtudiant(widget.etudiant), key: UniqueKey(),)));
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
 
-          },
-        child: Icon(Icons.update),
-        backgroundColor: Colors.blue,
+          Etudiant etudiant = Etudiant(nomController.text, prenomController.text,"111111", numTelController.text, emailController.text, false);
+          widget.etudiants.add(etudiant);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EtudiantList(etudiants:  widget.etudiants, key: UniqueKey(),)),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.deepOrange,
       ),// This trailing comma makes auto-formatting nicer for build methods.
-
     );
   }
 
@@ -99,8 +91,8 @@ class _IdEtudiant extends  State<IdEtudiant>
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                          controller: nomController,
-                          style: TextStyle(color: Colors.white70)
+                        controller: nomController,
+                        style: TextStyle(color: Colors.white70)
                       ),
                     ),
                   ), decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(width: 1.0, color: Colors.white70)),
@@ -130,8 +122,10 @@ class _IdEtudiant extends  State<IdEtudiant>
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField
-                        (controller: numTelController, style: TextStyle(color: Colors.white70),),
+                      child: TextFormField(
+                          controller: emailController,
+                          style: TextStyle(color: Colors.white70)
+                      ),
                     ),
                   ), decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
@@ -144,7 +138,10 @@ class _IdEtudiant extends  State<IdEtudiant>
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(controller: emailController, style: TextStyle(color: Colors.white70),),
+                      child: TextFormField(
+                          controller: numTelController,
+                          style: TextStyle(color: Colors.white70)
+                      ),
                     ),
                   ), decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(width: 1.0, color: Colors.white70)),
                 ),

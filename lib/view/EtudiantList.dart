@@ -1,10 +1,11 @@
 import 'package:appschool/model/etudiantModel.dart';
 import 'package:flutter/material.dart';
-import '../ModelList.dart';
+import 'addEtudiantView.dart';
 import 'profile.dart';
 
 
 class EtudiantList extends StatefulWidget {
+
 
   List<Etudiant> etudiants ;
   EtudiantList({required Key key, required this.etudiants}) : super(key: key);
@@ -42,6 +43,15 @@ class _EtudiantListState extends State<EtudiantList> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => addEtudiantView(etudiants: widget.etudiants, key: UniqueKey(),)));
+        },
+        child: Icon(Icons.add),
+        tooltip: 'Add Student',
       ),
     );
   }
